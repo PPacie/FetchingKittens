@@ -20,42 +20,47 @@ class KittenRequest {
         self.numberOfKittensToFetch = count
     }
     
-    func fetchRequest (handler: ([Kitten]) -> Void) {
-        
+    
+   func fetchRequest (handler: ([Kitten]) -> Void) {
+    
         var newKittens = [Kitten]()
         var sizeFile = 150
-        repeat {
+    
+        for var i = 0; i < numberOfKittensToFetch; ++i {
+            
             let kittensURL = NSURL(string:"https://placekitten.com/g/\(sizeFile)/\(sizeFile)")!
             let request = NSURLRequest(URL: kittensURL)
             
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error:NSError?) -> Void in
                 
-                
-                if error != nil {
+                if (error != nil) {
                     print("Error: \(error!.localizedDescription)")
+                    //--i
                 } else {
-                    print("Response: \(response)")
-                    let stringResult = String(data: data!, encoding:
-                        NSASCIIStringEncoding)
-                    if let pictureURL = NSURL(string: stringResult) {
-                        print("New Kitten added: \(pictureURL)")
-                        newKittens.append(Kitten(imageURL: pictureURL))
+                    if (response != nil) {
+                        //print("Response: \(response)")
+                        newKittens.append(Kitten(imageURL: kittensURL))
+                        print("ImageURL: \(kittensURL)")
                     }
-                    
+                   
+                    if newKittens.count == self.numberOfKittensToFetch {
+                        handler(newKittens)
+                    }
                 }
-            
+                
+                
             }
             task.resume()
             sizeFile++
-        } while newKittens.count < numberOfKittensToFetch
-        
-        handler(newKittens)
+        }   
+    
     
     }
     
-    
-        
+}
+
+
+
         
 
     
-}

@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		673581AA1B977E640095815A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581A91B977E640095815A /* AppDelegate.swift */; };
-		673581AC1B977E640095815A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581AB1B977E640095815A /* ViewController.swift */; };
 		673581AF1B977E640095815A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 673581AD1B977E640095815A /* Main.storyboard */; };
 		673581B11B977E640095815A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 673581B01B977E640095815A /* Assets.xcassets */; };
 		673581B41B977E640095815A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 673581B21B977E640095815A /* LaunchScreen.storyboard */; };
 		673581BC1B977EC80095815A /* KittenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581BB1B977EC80095815A /* KittenRequest.swift */; };
+		673581C21B9796A70095815A /* KittensCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581C11B9796A70095815A /* KittensCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		673581A61B977E640095815A /* FetchingKittens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FetchingKittens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		673581A91B977E640095815A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		673581AB1B977E640095815A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		673581AE1B977E640095815A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		673581B01B977E640095815A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		673581B31B977E640095815A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		673581B51B977E640095815A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		673581BB1B977EC80095815A /* KittenRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KittenRequest.swift; sourceTree = "<group>"; };
+		673581C11B9796A70095815A /* KittensCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KittensCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,47 @@
 		673581A81B977E640095815A /* FetchingKittens */ = {
 			isa = PBXGroup;
 			children = (
-				673581A91B977E640095815A /* AppDelegate.swift */,
-				673581AB1B977E640095815A /* ViewController.swift */,
+				673581BD1B9796250095815A /* Model */,
+				673581BE1B9796350095815A /* Views */,
+				673581BF1B97963B0095815A /* Controllers */,
+				673581C01B9796590095815A /* Support */,
+			);
+			path = FetchingKittens;
+			sourceTree = "<group>";
+		};
+		673581BD1B9796250095815A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				673581BB1B977EC80095815A /* KittenRequest.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		673581BE1B9796350095815A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		673581BF1B97963B0095815A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				673581C11B9796A70095815A /* KittensCollectionViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		673581C01B9796590095815A /* Support */ = {
+			isa = PBXGroup;
+			children = (
 				673581AD1B977E640095815A /* Main.storyboard */,
+				673581A91B977E640095815A /* AppDelegate.swift */,
 				673581B01B977E640095815A /* Assets.xcassets */,
 				673581B21B977E640095815A /* LaunchScreen.storyboard */,
 				673581B51B977E640095815A /* Info.plist */,
-				673581BB1B977EC80095815A /* KittenRequest.swift */,
 			);
-			path = FetchingKittens;
+			name = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				673581AC1B977E640095815A /* ViewController.swift in Sources */,
+				673581C21B9796A70095815A /* KittensCollectionViewController.swift in Sources */,
 				673581BC1B977EC80095815A /* KittenRequest.swift in Sources */,
 				673581AA1B977E640095815A /* AppDelegate.swift in Sources */,
 			);
