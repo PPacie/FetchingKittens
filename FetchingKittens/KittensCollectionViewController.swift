@@ -15,6 +15,7 @@ class KittensCollectionViewController: UICollectionViewController {
     //MARK: Model
     private struct Constans {
         static let numberOfKittens = 50 // Number of Images to Fetch
+        static let reuseIdentifier = "Cell"
     }
     
     var kittens = [Kitten]()
@@ -24,7 +25,7 @@ class KittensCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        // self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
         

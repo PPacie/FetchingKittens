@@ -13,6 +13,7 @@
 		673581B41B977E640095815A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 673581B21B977E640095815A /* LaunchScreen.storyboard */; };
 		673581BC1B977EC80095815A /* KittenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581BB1B977EC80095815A /* KittenRequest.swift */; };
 		673581C21B9796A70095815A /* KittensCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581C11B9796A70095815A /* KittensCollectionViewController.swift */; };
+		679D0B681B97B694008824B8 /* KittenImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679D0B671B97B694008824B8 /* KittenImageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		673581B51B977E640095815A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		673581BB1B977EC80095815A /* KittenRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KittenRequest.swift; sourceTree = "<group>"; };
 		673581C11B9796A70095815A /* KittensCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KittensCollectionViewController.swift; sourceTree = "<group>"; };
+		679D0B671B97B694008824B8 /* KittenImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KittenImageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		673581BE1B9796350095815A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				679D0B671B97B694008824B8 /* KittenImageCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			files = (
 				673581C21B9796A70095815A /* KittensCollectionViewController.swift in Sources */,
 				673581BC1B977EC80095815A /* KittenRequest.swift in Sources */,
+				679D0B681B97B694008824B8 /* KittenImageCell.swift in Sources */,
 				673581AA1B977E640095815A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +323,7 @@
 				673581BA1B977E640095815A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
