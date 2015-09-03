@@ -15,15 +15,16 @@ class KittensCollectionViewController: UICollectionViewController {
     //MARK: Model
     private struct Constants {
         static let numberOfKittens = 50 // Number of Images to Fetch
-        static let sizeOfKittensImages = 100 //Initial size of the images to be fetched. It will increment according to this particular API functionality. Otherwise we will always get the same image.
+        static let sizeOfKittensImages = 400 //Initial size of the images to be fetched. It will increment according to this particular API functionality. Otherwise we will always get the same image.
         static let reuseIdentifier = "Cell"
+        static let segueIdentifier = "ShowImage"
     }
     
     var kittens = [Kitten]()
     var kittenRequest = KittenRequest(count: Constants.numberOfKittens, imageSize: Constants.sizeOfKittensImages)
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         //Start activity indicator.
         activityIndicator.color = UIColor.whiteColor()
@@ -41,8 +42,9 @@ class KittensCollectionViewController: UICollectionViewController {
         }
         //Add Pinch Gesture Recognizer.
         collectionView?.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: ("handlePinch:")))
-       
+
     }
+
 
     // MARK: UICollectionViewDataSource
 
@@ -60,7 +62,7 @@ class KittensCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    //Handle Pinch Gesture Recognizer
+    //MARK: Handle Pinch Gesture Recognizer
     func handlePinch(gesture: UIPinchGestureRecognizer) {
         
         let zoomLayout = collectionView?.collectionViewLayout as! ZoomLayout
@@ -82,6 +84,23 @@ class KittensCollectionViewController: UICollectionViewController {
             break
         }
     }
+    
+    //MARK: Segue
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == Constants.segueIdentifier {
+            if let ivc = segue.destinationViewController as? ImageViewController {
+                if let indexPath = collectionView?.indexPathsForSelectedItems()!.first as NSIndexPath! {
+                    if let currentCell = collectionView?.cellForItemAtIndexPath(indexPath) as? KittenImageCell {
+                        print("Load Cell Image into ImageViewController")
+                        ivc.image = currentCell.imageView!.image
+                    }
+                    
+                }
+                
+            }
+        }
 
+    }
 
 }

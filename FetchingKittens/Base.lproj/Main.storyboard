@@ -12,20 +12,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewLayout key="collectionViewLayout" id="gjH-6A-R2M" customClass="ZoomLayout" customModule="FetchingKittens" customModuleProvider="target"/>
-                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="gba-r0-1Yh">
+                        <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="7Dd-25-AMc">
                             <rect key="frame" x="0.0" y="-64" width="600" height="600"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="6xP-2w-Upl" customClass="KittenImageCell" customModule="FetchingKittens" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="101" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="101" height="101"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JtV-L0-V0r">
-                                            <rect key="frame" x="1" y="1" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="1" width="100" height="100"/>
                                         </imageView>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-Aw-LHv">
                                             <rect key="frame" x="41" y="41" width="20" height="20"/>
@@ -34,9 +34,11 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="customSize" width="101" height="101"/>
                                 <connections>
                                     <outlet property="activityIndicator" destination="GPV-Aw-LHv" id="0iK-1d-dCS"/>
                                     <outlet property="imageView" destination="JtV-L0-V0r" id="Hhc-Kq-whv"/>
+                                    <segue destination="jdd-hU-hmm" kind="show" identifier="ShowImage" id="CrD-wr-cWp"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -47,12 +49,45 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="Fetching Kittens" id="veg-sn-3oz"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="gba-r0-1Yh" id="YkS-91-7I8"/>
+                        <outlet property="activityIndicator" destination="7Dd-25-AMc" id="1Ca-Ge-5Mw"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DKW-x3-xnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="682" y="57"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="hUx-ZR-tgT">
+            <objects>
+                <viewController id="jdd-hU-hmm" customClass="ImageViewController" customModule="FetchingKittens" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KQq-Vg-S65"/>
+                        <viewControllerLayoutGuide type="bottom" id="aKG-tB-2La"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GBe-gj-wzK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lUJ-7A-LQ0">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lUJ-7A-LQ0" firstAttribute="top" secondItem="GBe-gj-wzK" secondAttribute="top" id="BTN-Dz-Wly"/>
+                            <constraint firstItem="lUJ-7A-LQ0" firstAttribute="bottom" secondItem="aKG-tB-2La" secondAttribute="top" id="dD8-KW-GkH"/>
+                            <constraint firstAttribute="trailing" secondItem="lUJ-7A-LQ0" secondAttribute="trailing" id="eQd-wF-nPc"/>
+                            <constraint firstItem="lUJ-7A-LQ0" firstAttribute="leading" secondItem="GBe-gj-wzK" secondAttribute="leading" id="emb-6O-mPp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="lUJ-7A-LQ0" id="TXq-lX-Eiz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WtJ-g1-bzZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1454" y="57"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wGd-6H-5gH">
