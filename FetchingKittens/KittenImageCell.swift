@@ -10,16 +10,23 @@ import UIKit
 
 class KittenImageCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var imageURL = NSURL() {
+    var imageData = NSData() {
         didSet {
-            updateUI()
+            if imageView!.image == nil {
+                updateUI()
+            }
         }
     }
     
     private func updateUI() {
-        
+        activityIndicator.startAnimating()
+        imageView?.image = UIImage(data:imageData)
+        activityIndicator.stopAnimating()
     }
+        
+    
+
 }
