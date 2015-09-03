@@ -20,7 +20,7 @@ class ZoomLayout: UICollectionViewFlowLayout {
             invalidateLayout()
         }
     }
-    var pinchedCellPath = NSIndexPath()
+    var pinchedCellPath = NSIndexPath?()
     
     override func prepareLayout() {
         itemSize = CGSizeMake(100.0, 100.0)

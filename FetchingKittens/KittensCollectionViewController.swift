@@ -61,8 +61,26 @@ class KittensCollectionViewController: UICollectionViewController {
     }
     
     //Handle Pinch Gesture Recognizer
-    private func handlePinch() {
+    func handlePinch(gesture: UIPinchGestureRecognizer) {
         
+        let zoomLayout = collectionView?.collectionViewLayout as! ZoomLayout
+        
+        switch gesture.state {
+        case .Began:
+            let initialPinchPoint = gesture.locationInView(collectionView!)
+            if let pinchCellPath = self.collectionView?.indexPathForItemAtPoint(initialPinchPoint) {
+                zoomLayout.pinchedCellPath = pinchCellPath
+            }
+        case .Changed:
+            zoomLayout.pinchedCellScale = gesture.scale
+            zoomLayout.pinchedCellCenter = gesture.locationInView(collectionView!)
+        default:
+            collectionView?.performBatchUpdates({ () -> Void in
+                zoomLayout.pinchedCellPath = nil;
+                zoomLayout.pinchedCellScale = 1.0;
+                }, completion: nil)
+            break
+        }
     }
 
 
