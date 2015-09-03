@@ -10,10 +10,13 @@ import UIKit
 
 class KittensCollectionViewController: UICollectionViewController {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     //MARK: Model
     private struct Constants {
         static let numberOfKittens = 50 // Number of Images to Fetch
-        static let sizeOfKittensImages = 200 //Initial size of the images to be fetched. It will increment according to this particular API functionality. Otherwise we will always get the same image.
+        static let sizeOfKittensImages = 100 //Initial size of the images to be fetched. It will increment according to this particular API functionality. Otherwise we will always get the same image.
         static let reuseIdentifier = "Cell"
     }
     
@@ -22,7 +25,8 @@ class KittensCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activityIndicator.color = UIColor.whiteColor()
+        activityIndicator.startAnimating()
         //Fetch the Kittens and add them to the array.
         kittenRequest.fetchRequest { (newKittens) -> Void in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
@@ -30,6 +34,7 @@ class KittensCollectionViewController: UICollectionViewController {
                     self.kittens = newKittens
                     print("CollectinViewKittens: \(self.kittens.count)")
                     self.collectionView?.reloadData()
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }
