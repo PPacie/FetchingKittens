@@ -22,8 +22,10 @@ class KittensCollectionViewController: UICollectionViewController {
     var kittens = [Kitten]()
     var kittenRequest = KittenRequest(count: Constants.numberOfKittens, imageSize: Constants.sizeOfKittensImages)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        //Start activity indicator.
         activityIndicator.color = UIColor.whiteColor()
         activityIndicator.startAnimating()
         //Fetch the Kittens and add them to the array.
@@ -37,6 +39,9 @@ class KittensCollectionViewController: UICollectionViewController {
                 }
             }
         }
+        //Add Pinch Gesture Recognizer.
+        collectionView?.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: ("handlePinch:")))
+       
     }
 
     // MARK: UICollectionViewDataSource
@@ -53,6 +58,11 @@ class KittensCollectionViewController: UICollectionViewController {
         cell.imageData = kittens[indexPath.row].imageData
         
         return cell
+    }
+    
+    //Handle Pinch Gesture Recognizer
+    private func handlePinch() {
+        
     }
 
 

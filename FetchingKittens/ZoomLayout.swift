@@ -22,6 +22,10 @@ class ZoomLayout: UICollectionViewFlowLayout {
     }
     var pinchedCellPath = NSIndexPath()
     
+    override func prepareLayout() {
+        itemSize = CGSizeMake(100.0, 100.0)
+    }
+    
     func applyPinchToLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
         if (layoutAttributes.indexPath == pinchedCellPath)
         {
