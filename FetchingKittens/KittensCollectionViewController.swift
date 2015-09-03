@@ -94,6 +94,7 @@ class KittensCollectionViewController: UICollectionViewController {
                     if let currentCell = collectionView?.cellForItemAtIndexPath(indexPath) as? KittenImageCell {
                         print("Load Cell Image into ImageViewController")
                         ivc.image = currentCell.imageView!.image
+                        ivc.title = "Kitten"
                     }
                     
                 }
