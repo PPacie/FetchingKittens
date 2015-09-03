@@ -12,7 +12,6 @@ class KittensCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
     //MARK: Model
     private struct Constants {
         static let numberOfKittens = 50 // Number of Images to Fetch
