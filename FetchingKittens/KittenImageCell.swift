@@ -22,6 +22,7 @@ class KittenImageCell: UICollectionViewCell {
     }
     
     private func updateUI() {
+        activityIndicator.color = UIColor.whiteColor()
         activityIndicator.startAnimating()
         imageView?.image = UIImage(data:imageData)
         activityIndicator.stopAnimating()
