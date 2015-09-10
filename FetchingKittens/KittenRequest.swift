@@ -35,7 +35,7 @@ class KittenRequest {
         return kittens
     }
 }
-    
+//OLD FetchRequest Method
 //   //This fetch request will send the array of Kittens as a callback (only when it gets to the numberOfKittensToFetch).
 //   func fetchRequest (handler: ([Kitten]) -> Void) {
 //    

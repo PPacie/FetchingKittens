@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0qq-dy-SUo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0qq-dy-SUo">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <scenes>
         <!--Fetching Kittens-->
@@ -24,16 +24,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="101" height="101"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JtV-L0-V0r">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JtV-L0-V0r">
                                             <rect key="frame" x="0.0" y="1" width="100" height="100"/>
                                         </imageView>
-                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-Aw-LHv">
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="GPV-Aw-LHv">
                                             <rect key="frame" x="41" y="41" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="JtV-L0-V0r" firstAttribute="leading" secondItem="6xP-2w-Upl" secondAttribute="leading" id="Af8-AD-JE8"/>
+                                    <constraint firstItem="JtV-L0-V0r" firstAttribute="centerY" secondItem="6xP-2w-Upl" secondAttribute="centerY" id="i6W-YR-KRo"/>
+                                    <constraint firstItem="JtV-L0-V0r" firstAttribute="centerX" secondItem="6xP-2w-Upl" secondAttribute="centerX" id="p15-7d-JDL"/>
+                                    <constraint firstAttribute="bottom" secondItem="JtV-L0-V0r" secondAttribute="bottom" id="pyr-Jo-PHW"/>
+                                    <constraint firstItem="GPV-Aw-LHv" firstAttribute="centerX" secondItem="6xP-2w-Upl" secondAttribute="centerX" id="sKv-Qm-sAI"/>
+                                    <constraint firstItem="JtV-L0-V0r" firstAttribute="centerY" secondItem="GPV-Aw-LHv" secondAttribute="centerY" id="sbL-qw-lPE"/>
+                                </constraints>
                                 <size key="customSize" width="101" height="101"/>
                                 <connections>
                                     <outlet property="activityIndicator" destination="GPV-Aw-LHv" id="0iK-1d-dCS"/>
