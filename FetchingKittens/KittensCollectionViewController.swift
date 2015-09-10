@@ -34,7 +34,7 @@ class KittensCollectionViewController: UICollectionViewController {
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 if newKittens.count > 0 {
                     self.kittens = newKittens
-                    print("CollectinViewKittens: \(self.kittens.count)")
+                    print("CollectinViewKittens: \(self.kittens.count)", terminator: "")
                     self.collectionView?.reloadData()
                     self.activityIndicator.stopAnimating()
                 }

@@ -36,12 +36,12 @@ class KittenRequest {
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error:NSError?) -> Void in
                 
                 if (error != nil) {
-                    print("Error: \(error!.localizedDescription)")
+                    print("Error: \(error!.localizedDescription)", terminator: "")
                 } else {
                     //Add the NSData to the Kittens Array.
                     if (response != nil) {
                         newKittens.append(Kitten(imageData: data!))
-                        print("ImageURL: \(kittensURL)")
+                        print("ImageURL: \(kittensURL)", terminator: "")
                     }
                     //We check weather the newKittens Array gets to the requested number of images and send the callback.
                     if newKittens.count == self.numberOfKittensToFetch {
