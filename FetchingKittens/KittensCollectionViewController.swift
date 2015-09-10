@@ -30,6 +30,7 @@ class KittensCollectionViewController: UICollectionViewController {
         activityIndicator.startAnimating()
         //Add Kitten to the array using KittenRequest.
         kittens = request.createArrayOfKittens()
+        collectionView?.reloadData()
         self.activityIndicator.stopAnimating()
         //Add Pinch Gesture Recognizer.
         collectionView?.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: ("handlePinch:")))
@@ -48,7 +49,7 @@ class KittensCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.reuseIdentifier, forIndexPath: indexPath) as! KittenImageCell
     
         // Configure the cell
-        cell.imageURL = kittens[indexPath.row].imageURL
+        cell.kitten = kittens[indexPath.row]        
         
         return cell
     }
@@ -83,9 +84,9 @@ class KittensCollectionViewController: UICollectionViewController {
             if let ivc = segue.destinationViewController as? ImageViewController {
                 if let indexPath = collectionView?.indexPathsForSelectedItems()!.first as NSIndexPath! {
                     if let currentCell = collectionView?.cellForItemAtIndexPath(indexPath) as? KittenImageCell {
-                        print("Load Cell Image into ImageViewController")
+                        print("URL: \(currentCell.kitten?.imageURL)")
                         ivc.image = currentCell.imageView!.image
-                        ivc.title = "Kitten"
+                        ivc.title = "Cell: \(indexPath.row)"
                     }
                     
                 }

@@ -27,8 +27,9 @@ class KittenRequest {
         var fileSize = sizeOfKittensImages
         var kittens = [Kitten]()
         for _ in 0..<numberOfKittensToFetch {
-            if let kittensURL = NSURL(string:"https://placekitten.com/g/\(fileSize)/\(fileSize)") {
-                kittens.append(Kitten(imageURL: kittensURL))
+            if let kittenURL = NSURL(string:"https://placekitten.com/g/\(fileSize)/\(fileSize)") {
+                print("Kitten URL Added: \(kittenURL)")
+                kittens.append(Kitten(imageURL: kittenURL))
             }
             fileSize++
         }
