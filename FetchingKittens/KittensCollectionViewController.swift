@@ -19,9 +19,8 @@ class KittensCollectionViewController: UICollectionViewController {
         static let reuseIdentifier = "Cell"
         static let segueIdentifier = "ShowImage"
     }
-    
     var kittens = [Kitten]()
-    var kittenRequest = KittenRequest(count: Constants.numberOfKittens, imageSize: Constants.sizeOfKittensImages)
+    var request = KittenRequest(count: Constants.numberOfKittens, imageSize: Constants.sizeOfKittensImages)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +28,9 @@ class KittensCollectionViewController: UICollectionViewController {
         //Start activity indicator.
         activityIndicator.color = UIColor.whiteColor()
         activityIndicator.startAnimating()
-        //Fetch the Kittens and add them to the array.
-        kittenRequest.fetchRequest { (newKittens) -> Void in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                if newKittens.count > 0 {
-                    self.kittens = newKittens
-                    print("CollectinViewKittens: \(self.kittens.count)", terminator: "")
-                    self.collectionView?.reloadData()
-                    self.activityIndicator.stopAnimating()
-                }
-            }
-        }
+        //Add Kitten to the array using KittenRequest.
+        kittens = request.createArrayOfKittens()
+        self.activityIndicator.stopAnimating()
         //Add Pinch Gesture Recognizer.
         collectionView?.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: ("handlePinch:")))
 
@@ -57,7 +48,7 @@ class KittensCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.reuseIdentifier, forIndexPath: indexPath) as! KittenImageCell
     
         // Configure the cell
-        cell.imageData = kittens[indexPath.row].imageData
+        cell.imageURL = kittens[indexPath.row].imageURL
         
         return cell
     }

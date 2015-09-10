@@ -13,7 +13,7 @@ class KittenImageCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var imageData = NSData() {
+    var imageURL = NSURL() {
         didSet {
             if imageView!.image == nil {
                 updateUI()
@@ -24,7 +24,10 @@ class KittenImageCell: UICollectionViewCell {
     private func updateUI() {
         activityIndicator.color = UIColor.whiteColor()
         activityIndicator.startAnimating()
-        imageView?.image = UIImage(data:imageData)
+        
+        
+        
+      //  imageView?.image = UIImage(data:imageData)
         activityIndicator.stopAnimating()
     }
         

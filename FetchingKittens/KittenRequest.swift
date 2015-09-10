@@ -9,7 +9,7 @@
 import Foundation
 
 public struct Kitten {
-    let imageData: NSData
+    let imageURL: NSURL
 }
 
 class KittenRequest {
@@ -22,44 +22,56 @@ class KittenRequest {
         self.sizeOfKittensImages = imageSize
     }
     
-   //This fetch request will send the array of Kittens as a callback (only when it gets to the numberOfKittensToFetch).
-   func fetchRequest (handler: ([Kitten]) -> Void) {
-    
-        var newKittens = [Kitten]()
+    //Create an Array of Kitten struct. Lenght of the array will be the "numberOfKittensToFetch" and image sizes will start with the "sizeOfKittensImages" which will increment to avoid having the same "n" images.
+    func createArrayOfKittens() -> [Kitten] {
         var fileSize = sizeOfKittensImages
-    
-        //We loop over the number of Kittens to be fetched + X times, just in case the API fails. We tested it several times and we haven't got any errors so far. But still, just in case.
-        for var i = 0; i < numberOfKittensToFetch+10; ++i {
-            let kittensURL = NSURL(string:"https://placekitten.com/g/\(fileSize)/\(fileSize)")!
-            let request = NSURLRequest(URL: kittensURL)
-            //Launch a request to get the NSData and store it into the Kittens Array when succesfull.
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error:NSError?) -> Void in
-                
-                if (error != nil) {
-                    print("Error: \(error!.localizedDescription)", terminator: "")
-                } else {
-                    //Add the NSData to the Kittens Array.
-                    if (response != nil) {
-                        newKittens.append(Kitten(imageData: data!))
-                        print("ImageURL: \(kittensURL)", terminator: "")
-                    }
-                    //We check weather the newKittens Array gets to the requested number of images and send the callback.
-                    if newKittens.count == self.numberOfKittensToFetch {
-                        handler(newKittens)
-                    }
-                }
-                
-                
+        var kittens = [Kitten]()
+        for _ in 0..<numberOfKittensToFetch {
+            if let kittensURL = NSURL(string:"https://placekitten.com/g/\(fileSize)/\(fileSize)") {
+                kittens.append(Kitten(imageURL: kittensURL))
             }
-            task.resume()
             fileSize++
-    
         }
-    
-    
+        return kittens
     }
-    
 }
+    
+//   //This fetch request will send the array of Kittens as a callback (only when it gets to the numberOfKittensToFetch).
+//   func fetchRequest (handler: ([Kitten]) -> Void) {
+//    
+//        var newKittens = [Kitten]()
+//        var fileSize = sizeOfKittensImages
+//    
+//        //We loop over the number of Kittens to be fetched + X times, just in case the API fails. We tested it several times and we haven't got any errors so far. But still, just in case.
+//        for var i = 0; i < numberOfKittensToFetch+10; ++i {
+//            let kittensURL = NSURL(string:"https://placekitten.com/g/\(fileSize)/\(fileSize)")!
+//            let request = NSURLRequest(URL: kittensURL)
+//            //Launch a request to get the NSData and store it into the Kittens Array when succesfull.
+//            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error:NSError?) -> Void in
+//                
+//                if (error != nil) {
+//                    print("Error: \(error!.localizedDescription)", terminator: "")
+//                } else {
+//                    //Add the NSData to the Kittens Array.
+//                    if (response != nil) {
+//                        newKittens.append(Kitten(imageData: data!))
+//                        print("ImageURL: \(kittensURL)", terminator: "")
+//                    }
+//                    //We check weather the newKittens Array gets to the requested number of images and send the callback.
+//                    if newKittens.count == self.numberOfKittensToFetch {
+//                        handler(newKittens)
+//                    }
+//                }
+//                
+//                
+//            }
+//            task.resume()
+//            fileSize++
+//    
+//        }
+//    
+//    
+//    }
 
 
 
