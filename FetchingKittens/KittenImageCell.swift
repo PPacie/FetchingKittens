@@ -15,37 +15,35 @@ class KittenImageCell: UICollectionViewCell {
     
     var kitten = Kitten?() {
         didSet {
-            //We will update the image (ramdonly) if the kitten's API fails. So we will always get all the Cells of the CollectionView filled with some image.
-            if imageView!.image == nil {
-                print("ImageView is NIL - updateUI")
-                updateUI()
-            }
-        }
+            updateUI()
+         }
     }
     
     private func updateUI() {
         activityIndicator.color = UIColor.whiteColor()
         activityIndicator.startAnimating()
-        if let kittenImageURL = kitten?.imageURL {
-            let qos = Int(QOS_CLASS_USER_INITIATED.rawValue)
-            dispatch_async(dispatch_get_global_queue(qos , 0)) { () -> Void in
-                let imageData = NSData(contentsOfURL: kittenImageURL)
-                //blocks main thread!
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    if kittenImageURL == self.kitten?.imageURL {
-                        if imageData != nil {
-                            print("Update ImageView with URL: \(kittenImageURL)")
-                            self.imageView?.image = UIImage(data: imageData!)
-                        } else {
-                            self.imageView?.image = nil
+        if let kittenURL = kitten?.imageURL {
+            let request = NSURLRequest(URL: kittenURL)
+            //Launch a request to get the NSData and store it into the Kittens Array when succesfull.
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error:NSError?) -> Void in
+        
+                if (error != nil) {
+                    print("Error: \(error!.localizedDescription)", terminator: "")
+                } else {
+                    //Update the UI
+                    dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                        if kittenURL == self.kitten?.imageURL {
+                            if let imageData = data {
+                                print("Update image")
+                                self.imageView?.image = UIImage(data: imageData)
+                                self.activityIndicator.stopAnimating()
+                            }
                         }
-                        self.activityIndicator.stopAnimating()
                     }
-                    
                 }
-            }
-
-        }        
+            }            
+            task.resume()
+        }
         
     }
         

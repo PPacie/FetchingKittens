@@ -15,7 +15,7 @@ class KittensCollectionViewController: UICollectionViewController {
     //MARK: Model
     private struct Constants {
         static let numberOfKittens = 50 // Number of Images to Fetch
-        static let sizeOfKittensImages = 400 //Initial size of the images to be fetched. It will increment according to this particular API functionality. Otherwise we will always get the same image.
+        static let sizeOfKittensImages = 600 //Initial size of the images to be fetched. It will increment according to this particular API functionality. Otherwise we will always get the same image.
         static let reuseIdentifier = "Cell"
         static let segueIdentifier = "ShowImage"
     }
