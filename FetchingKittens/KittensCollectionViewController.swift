@@ -20,7 +20,7 @@ class KittensCollectionViewController: UICollectionViewController {
         static let segueIdentifier = "ShowImage"
     }
     var kittens = [Kitten]()
-    var request = KittenRequest(count: Constants.numberOfKittens, imageSize: Constants.sizeOfKittensImages)
+    var kittensCreation = KittensCreation(count: Constants.numberOfKittens, imageSize: Constants.sizeOfKittensImages)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class KittensCollectionViewController: UICollectionViewController {
         activityIndicator.color = UIColor.whiteColor()
         activityIndicator.startAnimating()
         //Add Kitten to the array using KittenRequest.
-        kittens = request.createArrayOfKittens()
+        kittens = kittensCreation.createArrayOfKittens()
         collectionView?.reloadData()
         self.activityIndicator.stopAnimating()
         //Add Pinch Gesture Recognizer.

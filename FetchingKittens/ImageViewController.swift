@@ -9,6 +9,23 @@
 import UIKit
 
 class ImageViewController: UIViewController, UIScrollViewDelegate {
+    
+    //MARK: Variables
+    
+    private var imageView = UIImageView()
+    
+    var image: UIImage? {
+        get { return imageView.image }
+        set {
+            imageView.image = newValue
+            imageView.sizeToFit()
+            scrollView?.contentSize  = imageView.frame.size
+            scrollViewDidScrollOrZoom = false
+            autoScale()
+        }
+    }
+    
+     private var scrollViewDidScrollOrZoom = false
 
     //MARK: View Lifecycle
     
@@ -49,8 +66,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         centerScrollViewContents()
     }
     
-    private var scrollViewDidScrollOrZoom = false
-    
+    //AutoScale Image
     private func autoScale() {
         if scrollViewDidScrollOrZoom {
             return
@@ -67,6 +83,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    //Center Image    
     func centerScrollViewContents() {
         let boundsSize = scrollView.bounds.size
         var contentsFrame = imageView.frame
@@ -86,22 +103,5 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         imageView.frame = contentsFrame
     }
     
-    
-    //MARK: ImageView
-    
-    private var imageView = UIImageView()
-    
-    var image: UIImage? {
-        get { return imageView.image }
-        set {
-            imageView.image = newValue
-            imageView.sizeToFit()
-            scrollView?.contentSize  = imageView.frame.size
-            scrollViewDidScrollOrZoom = false
-            autoScale()
-        }
-    }
-    
-
     
 }

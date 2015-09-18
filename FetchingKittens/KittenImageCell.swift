@@ -34,7 +34,6 @@ class KittenImageCell: UICollectionViewCell {
                     dispatch_async(dispatch_get_main_queue()) { () -> Void in
                         if kittenURL == self.kitten?.imageURL {
                             if let imageData = data {
-                                print("Update image")
                                 self.imageView?.image = UIImage(data: imageData)
                                 self.activityIndicator.stopAnimating()
                             }
