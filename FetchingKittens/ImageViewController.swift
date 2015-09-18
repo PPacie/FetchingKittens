@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageViewController: UIViewController, UIScrollViewDelegate {
+class ImageViewController: UIViewController {
     
     //MARK: Variables
     
@@ -25,7 +25,18 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-     private var scrollViewDidScrollOrZoom = false
+    private var scrollViewDidScrollOrZoom = false
+    
+    //MARK: ScrollView
+    
+    @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+            scrollView.contentSize  = imageView.frame.size
+            scrollView.delegate = self
+            scrollView.minimumZoomScale = 0.03
+            scrollView.maximumZoomScale = 5.0
+        }
+    }
 
     //MARK: View Lifecycle
     
@@ -41,16 +52,11 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         centerScrollViewContents()
     }
     
-    //MARK: ScrollView
     
-    @IBOutlet weak var scrollView: UIScrollView! {
-        didSet {
-            scrollView.contentSize  = imageView.frame.size
-            scrollView.delegate = self
-            scrollView.minimumZoomScale = 0.03
-            scrollView.maximumZoomScale = 5.0
-        }
-    }
+}
+
+    //MARK: ScrollView Delegate
+extension ImageViewController: UIScrollViewDelegate {
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return imageView
@@ -83,7 +89,7 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    //Center Image    
+    //Center Image
     func centerScrollViewContents() {
         let boundsSize = scrollView.bounds.size
         var contentsFrame = imageView.frame
@@ -102,6 +108,5 @@ class ImageViewController: UIViewController, UIScrollViewDelegate {
         
         imageView.frame = contentsFrame
     }
-    
-    
+
 }

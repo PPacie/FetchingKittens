@@ -15,11 +15,13 @@ class ZoomLayout: UICollectionViewFlowLayout {
             invalidateLayout()
         }
     }
+    
     var pinchedCellCenter = CGPoint() {
         didSet {
             invalidateLayout()
         }
     }
+    
     var pinchedCellPath = NSIndexPath?()
     
     override func prepareLayout() {
