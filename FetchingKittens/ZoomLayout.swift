@@ -25,7 +25,13 @@ class ZoomLayout: UICollectionViewFlowLayout {
     var pinchedCellPath = NSIndexPath?()
     
     override func prepareLayout() {
-        itemSize = CGSizeMake(100.0, 100.0)
+        
+        minimumLineSpacing = 1
+        minimumInteritemSpacing = 1
+        //We indicate that there are going to be 3 Cells per row.
+        let dimension = round((collectionView!.bounds.width - 2) / 3)
+        
+        itemSize = CGSize(width: dimension, height: dimension)
     }
     
     func applyPinchToLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {

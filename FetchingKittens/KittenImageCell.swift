@@ -23,7 +23,7 @@ class KittenImageCell: UICollectionViewCell {
         guard let kittenURL = kitten?.imageURL else { return }
         let request = NSURLRequest(URL: kittenURL)
         //Launch a request to get the NSData and store it into the Kittens Array when succesfull.
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error:NSError?) -> Void in
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, _, error:NSError?) -> Void in
             
             if (error != nil) {
                 print("Error: \(error!.localizedDescription)", terminator: "")
