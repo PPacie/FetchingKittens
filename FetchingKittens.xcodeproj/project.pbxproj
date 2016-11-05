@@ -13,7 +13,7 @@
 		673581AF1B977E640095815A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 673581AD1B977E640095815A /* Main.storyboard */; };
 		673581B11B977E640095815A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 673581B01B977E640095815A /* Assets.xcassets */; };
 		673581B41B977E640095815A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 673581B21B977E640095815A /* LaunchScreen.storyboard */; };
-		673581BC1B977EC80095815A /* KittensCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581BB1B977EC80095815A /* KittensCreation.swift */; };
+		673581BC1B977EC80095815A /* Kittens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581BB1B977EC80095815A /* Kittens.swift */; };
 		673581C21B9796A70095815A /* KittensCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673581C11B9796A70095815A /* KittensCollectionViewController.swift */; };
 		679D0B681B97B694008824B8 /* KittenImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679D0B671B97B694008824B8 /* KittenImageCell.swift */; };
 /* End PBXBuildFile section */
@@ -27,7 +27,7 @@
 		673581B01B977E640095815A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		673581B31B977E640095815A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		673581B51B977E640095815A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		673581BB1B977EC80095815A /* KittensCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KittensCreation.swift; sourceTree = "<group>"; };
+		673581BB1B977EC80095815A /* Kittens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kittens.swift; sourceTree = "<group>"; };
 		673581C11B9796A70095815A /* KittensCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KittensCollectionViewController.swift; sourceTree = "<group>"; };
 		679D0B671B97B694008824B8 /* KittenImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KittenImageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,7 +73,7 @@
 		673581BD1B9796250095815A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				673581BB1B977EC80095815A /* KittensCreation.swift */,
+				673581BB1B977EC80095815A /* Kittens.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -136,11 +136,12 @@
 			attributes = {
 				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Pablo Paciello";
 				TargetAttributes = {
 					673581A51B977E640095815A = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -181,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				673581C21B9796A70095815A /* KittensCollectionViewController.swift in Sources */,
-				673581BC1B977EC80095815A /* KittensCreation.swift in Sources */,
+				673581BC1B977EC80095815A /* Kittens.swift in Sources */,
 				679D0B681B97B694008824B8 /* KittenImageCell.swift in Sources */,
 				673581AA1B977E640095815A /* AppDelegate.swift in Sources */,
 				67034EDF1B98F11B00E41C4F /* ImageViewController.swift in Sources */,
@@ -224,8 +225,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -268,8 +271,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -288,6 +293,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -296,10 +302,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FetchingKittens/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ppacie.FetchingKittens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -307,10 +315,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FetchingKittens/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ppacie.FetchingKittens;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

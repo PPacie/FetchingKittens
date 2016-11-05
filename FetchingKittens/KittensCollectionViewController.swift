@@ -13,61 +13,55 @@ class KittensCollectionViewController: UICollectionViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //MARK: Model
-    private struct Constants {
+    fileprivate struct Constants {
         static let numberOfKittens = 50 // Number of Images to Fetch
         static let sizeOfKittensImages = 600 //Initial size of the images to be fetched. It will increment according to this particular API functionality. Otherwise we will always get the same image.
         static let reuseIdentifier = "Cell"
         static let segueIdentifier = "ShowImage"
     }
-    var kittens = [Kitten]()
-    var kittensCreation = KittensCreation(count: Constants.numberOfKittens, imageSize: Constants.sizeOfKittensImages)
+    var kittens = Kitten.createArrayOfKittens(numberOfKittens: Constants.numberOfKittens, heightOfImages: Constants.sizeOfKittensImages)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Start activity indicator.
-        activityIndicator.color = UIColor.whiteColor()
+        activityIndicator.color = UIColor.white
         activityIndicator.startAnimating()
-        //Add Kitten to the array using KittenRequest.
-        kittens = kittensCreation.createArrayOfKittens()
+        
         collectionView?.reloadData()
-        self.activityIndicator.stopAnimating()
+        activityIndicator.stopAnimating()
         //Add Pinch Gesture Recognizer.
-        collectionView?.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: ("handlePinch:")))
-
+        collectionView?.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: (#selector(KittensCollectionViewController.handlePinch(_:)))))
     }
 
-
     // MARK: UICollectionViewDataSource
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return kittens.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(Constants.reuseIdentifier, forIndexPath: indexPath) as! KittenImageCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifier, for: indexPath) as! KittenImageCell
     
         // Configure the cell
-        cell.kitten = kittens[indexPath.row]        
+        cell.populateWith(kittens[indexPath.row])
         
         return cell
     }
     
     //MARK: Handle Pinch Gesture Recognizer
-    func handlePinch(gesture: UIPinchGestureRecognizer) {
+    func handlePinch(_ gesture: UIPinchGestureRecognizer) {
         
         let zoomLayout = collectionView?.collectionViewLayout as! ZoomLayout
         
         switch gesture.state {
-        case .Began:
-            let initialPinchPoint = gesture.locationInView(collectionView!)
-            if let pinchCellPath = self.collectionView?.indexPathForItemAtPoint(initialPinchPoint) {
+        case .began:
+            let initialPinchPoint = gesture.location(in: collectionView!)
+            if let pinchCellPath = self.collectionView?.indexPathForItem(at: initialPinchPoint) {
                 zoomLayout.pinchedCellPath = pinchCellPath
             }
-        case .Changed:
+        case .changed:
             zoomLayout.pinchedCellScale = gesture.scale
-            zoomLayout.pinchedCellCenter = gesture.locationInView(collectionView!)
+            zoomLayout.pinchedCellCenter = gesture.location(in: collectionView!)
         default:
             collectionView?.performBatchUpdates({ () -> Void in
                 zoomLayout.pinchedCellPath = nil;
@@ -77,23 +71,17 @@ class KittensCollectionViewController: UICollectionViewController {
         }
     }
     
-    //MARK: Segue
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    //MARK: Segue    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segueIdentifier {
-            if let ivc = segue.destinationViewController as? ImageViewController {
-                if let indexPath = collectionView?.indexPathsForSelectedItems()!.first as NSIndexPath! {
-                    if let currentCell = collectionView?.cellForItemAtIndexPath(indexPath) as? KittenImageCell {
-                        print("URL: \(currentCell.kitten?.imageURL)")
+            if let ivc = segue.destination as? ImageViewController {
+                if let indexPath = collectionView?.indexPathsForSelectedItems!.first as IndexPath! {
+                    if let currentCell = collectionView?.cellForItem(at: indexPath) as? KittenImageCell {
                         ivc.image = currentCell.imageView!.image
                         ivc.title = "Cell: \(indexPath.row)"
                     }
-                    
                 }
-                
             }
         }
-
     }
-
 }

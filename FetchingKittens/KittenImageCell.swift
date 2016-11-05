@@ -12,37 +12,28 @@ class KittenImageCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    var kitten = Kitten?() {
-        didSet {
-            updateUI()
-         }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
     }
     
-    private func updateUI() {
-        imageView.image = nil
-        guard let kittenURL = kitten?.imageURL else { return }
-        let request = NSURLRequest(URL: kittenURL)
+    func populateWith (_ kitten: Kitten) {
+        
+        let request = URLRequest(url: kitten.imageURL)
         //Launch a request to get the NSData and store it into the Kittens Array when succesfull.
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData?, _, error:NSError?) -> Void in
-            
+
+        let task = URLSession.shared.dataTask(with: request) { (data, _, error) in
             if (error != nil) {
                 print("Error: \(error!.localizedDescription)", terminator: "")
             } else {
                 //Update the UI
-                dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                    if let imageData = data where kittenURL == self?.kitten?.imageURL {
+                DispatchQueue.main.async { [weak self] in
+                    if let imageData = data {
                         self?.imageView?.image = UIImage(data: imageData)
                     }
                 }
             }
         }
         task.resume()
-    
     }
-
-
-
-
-
-
 }

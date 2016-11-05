@@ -12,7 +12,7 @@ class ImageViewController: UIViewController {
     
     //MARK: Variables
     
-    private var imageView = UIImageView()
+    fileprivate var imageView = UIImageView()
     
     var image: UIImage? {
         get { return imageView.image }
@@ -25,21 +25,19 @@ class ImageViewController: UIViewController {
         }
     }
     
-    private var scrollViewDidScrollOrZoom = false
+    fileprivate var scrollViewDidScrollOrZoom = false
     
     //MARK: ScrollView
-    
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.contentSize  = imageView.frame.size
             scrollView.delegate = self
             scrollView.minimumZoomScale = 0.03
-            scrollView.maximumZoomScale = 5.0
+            scrollView.maximumZoomScale = 1.0
         }
     }
 
     //MARK: View Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -51,29 +49,27 @@ class ImageViewController: UIViewController {
         autoScale()
         centerScrollViewContents()
     }
-    
-    
 }
 
     //MARK: ScrollView Delegate
 extension ImageViewController: UIScrollViewDelegate {
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollViewDidScrollOrZoom = true
         centerScrollViewContents()
     }
     
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         scrollViewDidScrollOrZoom = true
         centerScrollViewContents()
     }
     
     //AutoScale Image
-    private func autoScale() {
+    fileprivate func autoScale() {
         if scrollViewDidScrollOrZoom {
             return
         }
@@ -108,5 +104,4 @@ extension ImageViewController: UIScrollViewDelegate {
         
         imageView.frame = contentsFrame
     }
-
 }

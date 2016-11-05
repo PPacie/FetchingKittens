@@ -10,59 +10,43 @@ import UIKit
 
 class ZoomLayout: UICollectionViewFlowLayout {
     
-    var pinchedCellScale = CGFloat(){
-        didSet {
-            invalidateLayout()
-        }
-    }
+    var pinchedCellScale = CGFloat(){ didSet { invalidateLayout() } }
+    var pinchedCellCenter = CGPoint() { didSet { invalidateLayout() } }
+    var pinchedCellPath: IndexPath?
     
-    var pinchedCellCenter = CGPoint() {
-        didSet {
-            invalidateLayout()
-        }
-    }
-    
-    var pinchedCellPath = NSIndexPath?()
-    
-    override func prepareLayout() {
+    override func prepare() {
         
         minimumLineSpacing = 1
         minimumInteritemSpacing = 1
         //We indicate that there are going to be 3 Cells per row.
         let dimension = round((collectionView!.bounds.width - 2) / 3)
-        
         itemSize = CGSize(width: dimension, height: dimension)
     }
     
-    func applyPinchToLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        if (layoutAttributes.indexPath == pinchedCellPath)
-        {
+    func applyPinchToLayoutAttributes(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        
+        if (layoutAttributes.indexPath == pinchedCellPath) {
             layoutAttributes.transform3D = CATransform3DMakeScale(pinchedCellScale, pinchedCellScale, 1.0)
             layoutAttributes.center = pinchedCellCenter
             layoutAttributes.zIndex = 1
         }
-
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         
-        let allAttributesInRect = super.layoutAttributesForElementsInRect(rect)
+        let allAttributesInRect = super.layoutAttributesForElements(in: rect)
         
         for cellAttributes in allAttributesInRect! {
             applyPinchToLayoutAttributes(cellAttributes)
         }
         
         return allAttributesInRect
-        
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         
-        let attributes = super.layoutAttributesForItemAtIndexPath(indexPath)
-        
+        let attributes = super.layoutAttributesForItem(at: indexPath)
         applyPinchToLayoutAttributes(attributes!)
-        
         return attributes
     }
-
 }
