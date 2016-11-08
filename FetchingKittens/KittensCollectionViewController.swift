@@ -77,7 +77,7 @@ class KittensCollectionViewController: UICollectionViewController {
             if let ivc = segue.destination as? ImageViewController {
                 if let indexPath = collectionView?.indexPathsForSelectedItems!.first as IndexPath! {
                     if let currentCell = collectionView?.cellForItem(at: indexPath) as? KittenImageCell {
-                        ivc.image = currentCell.imageView!.image
+                        ivc.imageView.image = currentCell.imageView!.image
                         ivc.title = "Cell: \(indexPath.row)"
                     }
                 }

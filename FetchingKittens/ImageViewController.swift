@@ -11,43 +11,26 @@ import UIKit
 class ImageViewController: UIViewController {
     
     //MARK: Variables
-    
-    fileprivate var imageView = UIImageView()
-    
-    var image: UIImage? {
-        get { return imageView.image }
-        set {
-            imageView.image = newValue
-            imageView.sizeToFit()
-            scrollView?.contentSize  = imageView.frame.size
-            scrollViewDidScrollOrZoom = false
-            autoScale()
-        }
-    }
-    
+    var imageView = UIImageView()
     fileprivate var scrollViewDidScrollOrZoom = false
     
     //MARK: ScrollView
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
-            scrollView.contentSize  = imageView.frame.size
             scrollView.delegate = self
             scrollView.minimumZoomScale = 0.03
-            scrollView.maximumZoomScale = 1.0
+            scrollView.maximumZoomScale = 5.0
+            scrollView.addSubview(imageView)
         }
     }
 
     //MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        scrollView.addSubview(imageView)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        
+        imageView.sizeToFit()
+        scrollViewDidScrollOrZoom = false
         autoScale()
-        centerScrollViewContents()
     }
 }
 
@@ -68,25 +51,26 @@ extension ImageViewController: UIScrollViewDelegate {
         centerScrollViewContents()
     }
     
-    //AutoScale Image
-    fileprivate func autoScale() {
+    func autoScale() {
         if scrollViewDidScrollOrZoom {
             return
         }
         if let sv = scrollView {
-            if image != nil {
-                sv.zoomScale = max(sv.bounds.size.height / image!.size.height,
-                    sv.bounds.size.width / image!.size.width)
-                sv.contentOffset = CGPoint(x: (imageView.frame.size.width - sv.frame.size.width) / 2,
-                    y: (imageView.frame.size.height - sv.frame.size.height) / 2)
-                scrollViewDidScrollOrZoom = false
-                centerScrollViewContents()
+            guard let image = imageView.image else { return }
+            let zoomScale = min(sv.bounds.size.height / image.size.height,
+                                sv.bounds.size.width / image.size.width)
+            
+            if zoomScale > sv.maximumZoomScale {
+                sv.maximumZoomScale = zoomScale
             }
+            sv.zoomScale = zoomScale
+
+            scrollViewDidScrollOrZoom = false
         }
     }
     
-    //Center Image
     func centerScrollViewContents() {
+        
         let boundsSize = scrollView.bounds.size
         var contentsFrame = imageView.frame
         
